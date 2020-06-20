@@ -1,13 +1,15 @@
 import axios from "axios";
 
 export const instance = axios.create({
-    withCredentials: true,
-    baseURL: "",
-    headers: {"": ""}
+    baseURL: "https://covid19.mathdro.id/api",
 })
 
 export const api = {
-    request() {
-        return instance.get(``).then(response => response.data)
+    async fetchData() {
+        try {
+            return await instance.get("/")
+        } catch (e) {
+            alert("some error occurred")
+        }
     }
 }

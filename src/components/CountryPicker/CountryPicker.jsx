@@ -1,10 +1,9 @@
 import React from "react";
-import style from "./preloader.module.scss";
+import style from "./country-picker.module.scss";
 
-export const Preloader = () => {
+export const CountryPicker = () => {
     return (
         <div className={style.container}>
-            <div/>
         </div>
     )
 }
