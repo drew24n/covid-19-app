@@ -5,7 +5,7 @@ import {Preloader} from "../common/Preloader/Preloader";
 
 export const Cards = ({confirmed, recovered, deaths, lastUpdate}) => {
 
-    if (!confirmed) return <Preloader/>
+    if (!lastUpdate) return <Preloader/>
 
     return (
         <div className={style.container}>
