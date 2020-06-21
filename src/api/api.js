@@ -7,7 +7,8 @@ export const instance = axios.create({
 export const api = {
     async fetchData() {
         try {
-            return await instance.get("/")
+            const {data: {confirmed, recovered, deaths, lastUpdate}} = await instance.get("")
+            return {confirmed, recovered, deaths, lastUpdate}
         } catch (e) {
             alert("some error occurred")
         }
