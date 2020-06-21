@@ -19,7 +19,7 @@ export const App = () => {
 
     return (
         <main className={style.container}>
-            <Cards data={data}/>
+            <Cards {...data}/>
             <Chart/>
             <CountryPicker/>
         </main>
