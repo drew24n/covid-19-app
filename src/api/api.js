@@ -5,7 +5,8 @@ const instance = axios.create({
 })
 
 export const api = {
-    async fetchData() {
+    async fetchData(country) {
+        if (country) {}
         try {
             const {data: {confirmed, recovered, deaths, lastUpdate}} = await instance.get("/")
             return {confirmed, recovered, deaths, lastUpdate}
@@ -16,12 +17,21 @@ export const api = {
 
     async fetchDailyData() {
         try {
-            const {data} =  await instance.get("/daily")
+            const {data} = await instance.get("/daily")
             return data.map((dailyData) => ({
                 confirmed: dailyData.confirmed.total,
                 deaths: dailyData.deaths.total,
                 date: dailyData.reportDate
             }))
+        } catch (e) {
+            alert(e)
+        }
+    },
+
+    async fetchCountryData() {
+        try {
+            const {data: {countries}} = await instance.get("/countries")
+            return countries.map((countries) => countries.name)
         } catch (e) {
             alert(e)
         }
