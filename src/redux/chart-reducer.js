@@ -1,23 +1,23 @@
 const SET_DAILY_DATA = "SET_DAILY_DATA"
 
 const initialState = {
-    dailyData: []
+    chartData: []
 }
 
 export const chartReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_DAILY_DATA:
-            return {...state, dailyData: action.payload}
+            return {...state, chartData: action.payload}
         default:
             return state
     }
 }
 
-const setDailyDataAction = (payload) => ({type: SET_DAILY_DATA, payload})
+const setChartDataAction = (payload) => ({type: SET_DAILY_DATA, payload})
 
-export const setDailyData = (payload) => async (dispatch) => {
+export const setChartData = (payload) => async (dispatch) => {
     try {
-        await dispatch(setDailyDataAction(payload))
+        await dispatch(setChartDataAction(payload))
     } catch (e) {
         alert(e)
     }

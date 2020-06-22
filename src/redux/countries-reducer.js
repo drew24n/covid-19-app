@@ -1,13 +1,13 @@
 const SET_COUNTRIES_DATA = "SET_COUNTRIES_DATA"
 
 const initialState = {
-    data: []
+    countriesData: []
 }
 
 export const countriesReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_COUNTRIES_DATA:
-            return {...state, data: action.payload}
+            return {...state, countriesData: action.payload}
         default:
             return state
     }

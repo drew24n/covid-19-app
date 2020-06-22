@@ -1,23 +1,24 @@
 import axios from "axios";
 
-const instance = axios.create({
-    baseURL: "https://covid19.mathdro.id/api",
-})
+const baseURL = "https://covid19.mathdro.id/api"
 
 export const api = {
-    async fetchData(country) {
-        if (country) {}
+    async fetchCardsData(country) {
+        let newUrl = baseURL
+        if (country) {
+            newUrl = `${baseURL}/countries/${country}`
+        }
         try {
-            const {data: {confirmed, recovered, deaths, lastUpdate}} = await instance.get("/")
+            let {data: {confirmed, recovered, deaths, lastUpdate}} = await axios.get(newUrl)
             return {confirmed, recovered, deaths, lastUpdate}
         } catch (e) {
             alert(e)
         }
     },
 
-    async fetchDailyData() {
+    async fetchChartData() {
         try {
-            const {data} = await instance.get("/daily")
+            let {data} = await axios.get(`${baseURL}/daily`)
             return data.map((dailyData) => ({
                 confirmed: dailyData.confirmed.total,
                 deaths: dailyData.deaths.total,
@@ -28,9 +29,9 @@ export const api = {
         }
     },
 
-    async fetchCountryData() {
+    async fetchCountriesData() {
         try {
-            const {data: {countries}} = await instance.get("/countries")
+            let {data: {countries}} = await axios.get(`${baseURL}/countries`)
             return countries.map((countries) => countries.name)
         } catch (e) {
             alert(e)

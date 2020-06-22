@@ -3,21 +3,23 @@ import style from "./country-picker.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {api} from "../../api/api";
 import {setCountriesData} from "../../redux/countries-reducer";
+import {setCountry} from "../../redux/app-reducer";
 
 export const CountryPicker = () => {
 
-    const dispatch = useDispatch()
-    const data = useSelector(state => state.countries.data)
+    let dispatch = useDispatch()
+    let countriesData = useSelector(state => state.countries.countriesData)
 
     useEffect(() => {
-            api.fetchCountryData().then(res => dispatch(setCountriesData(res)))
+            api.fetchCountriesData().then(res => dispatch(setCountriesData(res)))
         }, [dispatch]
     )
-debugger
+
     return (
         <div className={style.container}>
-            <select>
-                {data.map((country) => <option key={country} value={country}>{country}</option>)}
+            <select defaultValue={"global"} onChange={(event) => dispatch(setCountry(event.target.value))}>
+                <option>global</option>
+                {countriesData.map((country) => <option key={country} value={country}>{country}</option>)}
             </select>
         </div>
     )

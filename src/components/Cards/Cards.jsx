@@ -4,43 +4,43 @@ import CountUp from "react-countup";
 import {Preloader} from "../common/Preloader/Preloader";
 import {useDispatch, useSelector} from "react-redux";
 import {api} from "../../api/api";
-import {setData} from "../../redux/cards-reducer";
+import {setCardsData} from "../../redux/cards-reducer";
 
-export const Cards = () => {
+export const Cards = ({country}) => {
 
-    const dispatch = useDispatch()
-    const data = useSelector(state => state.cards.data)
+    let dispatch = useDispatch()
+    let cardsData = useSelector(state => state.cards.cardsData)
 
     useEffect(() => {
-            api.fetchData().then(res => dispatch(setData(res)))
-        }, [dispatch]
+            api.fetchCardsData(country).then(res => dispatch(setCardsData(res)))
+        }, [dispatch, country]
     )
 
-    if (!data.lastUpdate) return <Preloader/>
+    if (!cardsData.lastUpdate) return <Preloader/>
 
     return (
         <div className={style.container}>
-            <div>
+            <div className={style.card}>
                 <h5>Infected</h5>
                 <div>
-                    <CountUp start={0} end={data.confirmed.value} duration={1.5} separator=","/>
-                    <p>{new Date(data.lastUpdate).toDateString()}</p>
+                    <CountUp start={0} end={cardsData.confirmed.value} duration={1.5} separator=","/>
+                    <p>{new Date(cardsData.lastUpdate).toDateString()}</p>
                     <p>Number of active cases of Covid-19</p>
                 </div>
             </div>
-            <div>
+            <div className={style.card}>
                 <h5>Recovered</h5>
                 <div>
-                    <CountUp start={0} end={data.recovered.value} duration={1.5} separator=","/>
-                    <div>{new Date(data.lastUpdate).toDateString()}</div>
+                    <CountUp start={0} end={cardsData.recovered.value} duration={1.5} separator=","/>
+                    <div>{new Date(cardsData.lastUpdate).toDateString()}</div>
                     <p>Number of recoveries from Covid-19</p>
                 </div>
             </div>
-            <div>
+            <div className={style.card}>
                 <h5>Deaths</h5>
                 <div>
-                    <CountUp start={0} end={data.deaths.value} duration={1.5} separator=","/>
-                    <div>{new Date(data.lastUpdate).toDateString()}</div>
+                    <CountUp start={0} end={cardsData.deaths.value} duration={1.5} separator=","/>
+                    <div>{new Date(cardsData.lastUpdate).toDateString()}</div>
                     <p>Number of deaths caused by Covid-19</p>
                 </div>
             </div>
