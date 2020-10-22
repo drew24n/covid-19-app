@@ -1,0 +1,23 @@
+* {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  letter-spacing: normal;
+  color: #212529;
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.container {
+  min-height: 100vh;
+  min-width: 360px;
+
+  header {
+    background: no-repeat center url("./assets/images/header.png");
+    background-size: contain;
+    height: 150px;
+    margin: 20px;
+  }
+}

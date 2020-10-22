@@ -1,0 +1,17 @@
+.container {
+  width: fit-content;
+  margin: 20px auto;
+
+  h4 {
+    text-align: center;
+  }
+
+  select {
+    cursor: pointer;
+    border: none;
+    border-bottom: 1px solid #212529;
+    &:focus {
+      outline: none;
+    }
+  }
+}
